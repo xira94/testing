@@ -1,0 +1,48 @@
+.img_collection {
+  display: flex;
+  justify-content: center;
+  /* margin-top: 35px; */
+  height: 280px;
+}
+.img_home {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 18vh;
+  margin: auto;
+  background: rgb(255, 255, 255);
+}
+
+.img_home img {
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+}
+.inner_image {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.btn_post {
+  display: flex;
+  justify-content: flex-end;
+  width: 88%;
+  margin: auto;
+}
+.btn_post button {
+  border: none;
+}
+
+h3 {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.one {
+  width: 400px;
+  margin-top: 50px;
+}
