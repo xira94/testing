@@ -1,0 +1,28 @@
+.header__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.menu {
+  display: flex;
+}
+.header__container p {
+  font-weight: 400;
+  font-size: 0.8cm;
+  color: #186d51;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.btn_1 {
+  height: 40px;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  font-weight: 500;
+  padding: 0 7px;
+  background: #186d51;
+  transition: 0.3s ease;
+  color: #ffffff;
+  border-radius: 5px;
+  margin-left: 20px;
+}

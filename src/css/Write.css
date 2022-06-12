@@ -1,0 +1,39 @@
+.container_write {
+  display: flex;
+  flex-direction: column;
+}
+
+.write_btn1 {
+  background-color: #006633;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 10%;
+  text-align: center;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.textarea {
+  padding: 20px;
+  width: 400px;
+  height: 300px;
+  margin: auto;
+  margin-top: 1em;
+  justify-content: center;
+}
+.input_3 {
+  width: 400px;
+  height: 50px;
+  margin-top: 2em;
+  background: transparent;
+  color: #021d49;
+  border: 1px solid #021d49;
+  box-sizing: border-box;
+  text-align: center;
+  outline: none;
+  margin: auto;
+  margin-top: 10px;
+}
