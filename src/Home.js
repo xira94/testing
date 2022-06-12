@@ -59,15 +59,20 @@ const Home = () => {
           </div>
         </div>
       </div>
+
       <hr className="one" />
-      <h3>Board</h3>
-      <div className="btn_post">
-        <FontAwesomeIcon
-          size="2x"
-          color="rgb(48, 163, 63)"
-          icon={faCirclePlus}
-        />
-      </div>
+
+      <div className="board">
+        <div className="board_title">
+          <h3>Board</h3>
+          <div className="btn_post">
+            <FontAwesomeIcon
+              size="2x"
+              color="rgb(48, 163, 63)"
+              icon={faCirclePlus}
+            />
+          </div>
+        </div>
       <div className="img_collection">
         <div className="img_home">
           <img
@@ -119,6 +124,7 @@ const Home = () => {
             <FontAwesomeIcon size="lg" color="pink" icon={faHeart} />
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
