@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -6,15 +7,14 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
 import { BrowserRouter } from 'react-router-dom';
 
-// api
 import store from "./redux/configstore";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </Provider>
 );
 

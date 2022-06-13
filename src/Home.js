@@ -1,7 +1,7 @@
 import React from "react";
 import "./css/Home.css";
 import { useDispatch, useSelector } from 'react-redux';
-import { loadPostDB } from './redux/module/post'
+import { loadPostDB } from './redux/moduels/post'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
