@@ -1,15 +1,25 @@
+.main{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top:180px;
+}
+.main h1{
+  font-size:2em;
+}
 .img_collection {
   display: flex;
   justify-content: center;
-  /* margin-top: 35px; */
-  height: 280px;
+  align-items: center;
+  margin-top: 50px;
 }
 .img_home {
   display: flex;
   flex-direction: column;
   width: 200px;
   height: 18vh;
-  margin: auto;
+  margin: 2em;
   background: rgb(255, 255, 255);
 }
 
@@ -26,23 +36,26 @@
   margin-top: 10px;
 }
 
-.btn_post {
-  display: flex;
-  justify-content: flex-end;
-  width: 88%;
-  margin: auto;
+.board{
+  margin-top:50px;
 }
-.btn_post button {
-  border: none;
-}
-
-h3 {
+.board .board_title{
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
+.board .board_title h3{
+  flex-grow: 1;
+  margin-left: 1em;
+}
+
+.btn_post button {
+  border: none;
+}
 
 .one {
-  width: 400px;
-  margin-top: 50px;
+  width: 300px;
+  margin-top: 150px;
 }
+
+

@@ -17,35 +17,50 @@ const Write = () => {
       {/* <h1 style={{}}>게시글 작성</h1> */}
 
       {/* 이미지 업로드 버튼 */}
-      <label style={{}}>
-        <AddPhotoAlternateIcon style={{ cursor: "pointer", float: "right" }} />
+      <div className="wrap">
+      <label>
+        
+        <div style=
+        {imgUrl ? {
+        display:'none'
+        }
+        :
+        {
+          display:'flex',
+          alignItems:'center',
+          float:'right'
+        }}>
+        <AddPhotoAlternateIcon style={{ cursor: "pointer", color:'#222'}} />
+        <span style={{color:'#222', marginLeft:'0.5em',cursor: "pointer"}}>사진올리기</span>
         <input
           type="file"
           id="input-file"
           onChange={preview}
           style={{ display: "none" }}
         ></input>
+        </div>
 
         {/* 이미지 미리보기 */}
-        {imgUrl ? (
+        {imgUrl ? 
+        <div>
+          <img src ={imgUrl}
+            style={{
+              width: "400px",
+              height: "400px",
+              border: "1px solid #ccc",
+            }} alt=""/>
+          </div>
+         : 
           <div
             style={{
               width: "400px",
               height: "400px",
               border: "1px solid black",
-              margin: "auto",
+              display: 'none',
+              // margin: "auto",
             }}
           ></div>
-        ) : (
-          <div
-            style={{
-              width: "400px",
-              height: "400px",
-              border: "1px solid black",
-              margin: "auto",
-            }}
-          ></div>
-        )}
+        }
       </label>
 
       {/* 음료 이름 */}
@@ -62,11 +77,12 @@ const Write = () => {
       {/* 작성 완료 */}
       <div>
         <Link to="/">
-          <div className="write_btn1" value="작성 완료">
+          <button className="write_btn1" value="작성 완료">
             작성 완료
-          </div>
+          </button>
         </Link>
       </div>
+    </div>
     </div>
   );
 };
