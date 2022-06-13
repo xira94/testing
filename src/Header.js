@@ -8,16 +8,16 @@ const Header = () => {
     <header>
       <div className="header__container">
         <Link to="/">
-          <div class="logo"><strong>SSM</strong></div>
+          <div className="logo"><strong>SSM</strong></div>
         </Link>
         <div className="menu">
           <Link to="/signup">
-            <button type="button" class="btn_1">
+            <button type="button" className="btn_1">
               Signup
             </button>
           </Link>
           <Link to="/login">
-            <button type="button" class="btn_1">
+            <button type="button" className="btn_1">
               Login
             </button>
           </Link>
