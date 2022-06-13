@@ -7,7 +7,10 @@ const Detail = () => {
   return (
     <div className="Detail__container">
       <div className="img">
-        <img src="https://images.unsplash.com/photo-1615679953957-340c5cb38bd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhcmJ1Y2tzJTIwY29mZmVlfGVufDB8fDB8fA%3D%3D&w=1000&q=80"></img>
+        <img
+          src="https://images.unsplash.com/photo-1615679953957-340c5cb38bd7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3RhcmJ1Y2tzJTIwY29mZmVlfGVufDB8fDB8fA%3D%3D&w=1000&q=80"
+          alt="test"
+        ></img>
       </div>
       <div className="faHeart">
         <FontAwesomeIcon size="lg" icon={faHeart} />
