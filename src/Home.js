@@ -9,14 +9,17 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 import { useNavigate } from "react-router-dom";
+
 const Home = () => {
-  const navigate = useNavigate();
-  const toWrite = () => {
-    navigate("/Write");
-  };
-  // const is_login = useSelector((state) => state.user.is_login);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(loadPostDB());
+  }, []);
 
   const data = useSelector((state) => state.post.posts);
+  // console.log(data)
+
   return (
     <div className="main">
       <h1>Top5</h1>
@@ -89,12 +92,14 @@ const Home = () => {
             </div>
           </Link>
         </div>
+
         <div className="img_collection">
           {data.length !== 0 &&
             data.map((list, i) => {
               return (
                 <div className="img_home" key={i}>
-                  <Link to={`write/detail/${data[i].postId}`}>
+                  {/* <Link to={`write/detail/${data[i].postId}`}> */}
+                  <Link to={`write/detail/${data[i]._id}`}>
                     <img
                       alt={data.length !== 0 && data[i].title}
                       src="https://target.scene7.com/is/image/Target/GUEST_b75d74b7-e711-4bc5-9eb1-d0577622b3e2?wid=488&hei=488&fmt=pjpeg"
