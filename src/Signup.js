@@ -1,13 +1,10 @@
-
 import React, { useState } from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { signupDB, idCheckFB, nicknameCheckFB } from "./redux/moduels/user";
 
-
 import "./css/Signup.css";
 
 const Signup = () => {
-
   const dispatch = useDispatch();
 
   const [userId, setUserId] = useState("");
@@ -52,7 +49,6 @@ const Signup = () => {
   const nicknameCheck = () => {
     dispatch(nicknameCheckFB(nickname));
   };
-
 
   return (
     <section className="signin">

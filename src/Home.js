@@ -98,6 +98,7 @@ const Home = () => {
             data.map((list, i) => {
               return (
                 <div className="img_home" key={i}>
+                  {/* <Link to={`write/detail/${data[i].postId}`}> */}
                   <Link to={`write/detail/${data[i]._id}`}>
                     <img
                       alt={data.length !== 0 && data[i].title}
