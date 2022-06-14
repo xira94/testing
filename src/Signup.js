@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { signupDB, idCheckFB, nicknameCheckFB } from "./redux/moduels/user";
-import React, { useState } from "react";
-// import { useDispatch } from 'react-redux';
-// import {useNavigate} from 'react-router-dom';
-// import { registerUser } from './redux/moduels/user';
 
 import "./css/Signup.css";
 
