@@ -2,8 +2,14 @@ import React from "react";
 import "./css/Detail.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deletePostDB } from "./redux/moduels/post";
 
 const Detail = () => {
+  const dispatch = useDispatch();
+  const param = useParams().id;
+
   return (
     <div className="Detail__container">
       <div className="img">
@@ -57,16 +63,38 @@ const Detail = () => {
       </section>
       <section className="data-search">
         <div className="input-group">
+          {/* <input
+             type="text"
+          className="form-control"
+             placeholder="Comment"
+           ></input> */}
           <input
             type="text"
             className="form-control"
             placeholder="Comment"
           ></input>
+
           <button type="button" className="btn">
             Submit
           </button>
         </div>
       </section>
+      <div className="buttons">
+        <Link to={`/write/${param}`}>
+          <button type="button" className="btn">
+            수정
+          </button>
+        </Link>
+        <button
+          type="button"
+          className="btn"
+          onClick={() => {
+            dispatch(deletePostDB(param));
+          }}
+        >
+          삭제
+        </button>
+      </div>
     </div>
   );
 };

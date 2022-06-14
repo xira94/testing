@@ -11,13 +11,14 @@ import Login from "./Login";
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Header/>
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/detail" element={<Detail />} />
+        <Route exact path="/" element={<Home/>} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/write" element={<Write />} />
+        <Route path="/login" element={<Login/>} />
+        <Route path="/write" element={<Write/>} />
+        <Route path="/write/:id" element={<Write/>}/>
+        <Route path="/write/detail/:id" element={<Detail/>}/>
       </Routes>
     </div>
   );

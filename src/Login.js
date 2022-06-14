@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { loginDB } from "./redux/moduels/user";
 import "./css/Login.css";
 
+// import { loadUserDB } from './redux/module/user'
+
 const Login = () => {
   const dispatch = useDispatch();
 
@@ -35,6 +37,10 @@ const Login = () => {
     dispatch(loginDB(email, password));
   };
 
+  // React.useEffect(()=> {
+  //   dispatch(loadUserDB());
+  // }, [])
+
   return (
     <section className="login">
       <div className="login__card">
@@ -61,10 +67,14 @@ const Login = () => {
           {/* <input type="submit" value="로그인" /> */}
           <button onClick={handleLogin}>로그인</button>
         </form>
+
         <div className="actions">
           <a href="javascript:void(0)">
             아직 회원이 아니신가요? <u>회원가입 하기</u>
           </a>
+
+          {/* <div className="actions">
+          아직 회원이 아니신가요? <u>회원가입 하기</u> */}
         </div>
       </div>
     </section>

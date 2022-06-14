@@ -57,11 +57,17 @@ export default Header;
 {
   /* <Link to="/signup">
             <button type="button" class="btn_1">
+          <div className="logo"><strong>SSM</strong></div>
+        </Link>
+        <div className="menu">
+          <Link to="/signup">
+            <button type="button" className="btn_1">
+
               Signup
             </button>
           </Link>
           <Link to="/login">
-            <button type="button" class="btn_1">
+            <button type="button" className="btn_1">
               Login
             </button>
           </Link> */

@@ -1,27 +1,130 @@
 import React, { useState } from "react";
 import "./css/Write.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import { useDispatch, useSelector } from 'react-redux'
+import { addPostDB, modifyPostDB } from "./redux/moduels/post"
+import axios from 'axios';
+
+
 
 const Write = () => {
-  const [imgUrl, setImgUrl] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  
 
-  // 이미지 미리보기 함수
-  const preview = (e) => {
-    setImgUrl(URL.createObjectURL(e.target.files[0]));
+  const postList = useSelector(state => state.post.posts)
+  const param = useParams().id;
+  const is_edit = param ? true : false;
+  const edit_post = is_edit ? postList.find(p=> String(p.id) === param) : null;
+  const [title, setTitle] = useState(edit_post ? edit_post.title : '');
+  const [recipe, setRecipe] = useState(edit_post ? edit_post.recipe : '');
+  const [imgUrl, setImgUrl] = useState(edit_post ? {
+    img_file: edit_post.img_file,
+    preview_URL: edit_post.img_file
+  }: {
+    img_file:"",
+    preview_URL: ""
+  });
+  // console.log(edit_post)
+
+  // 수정 중 새로고침하면 데이터가 날아가므로 새로고침하면 강제 홈으로 이동
+  React.useEffect(()=> {
+    if(is_edit && !edit_post){
+      navigate(`/`)
+    }
+  })
+  
+  // // 이미지 미리보기 함수
+  // const preview = async(e) => {
+  //   setImgUrl(URL.createObjectURL(e.target.files[0]));
+  // };
+
+  // 이미지 저장 함수
+  const saveImage = (e) => {
+    console.log(e.target.files[0])
+    // 태그의 기본 기능으로 리프레쉬 되는 것을 방지.
+    e.preventDefault();
+    const fileReader = new FileReader();
+    
+    if(e.target.files[0]){
+      fileReader.readAsDataURL(e.target.files[0])
+    }
+    fileReader.onload = () => {
+      setImgUrl({
+        img_file: e.target.files[0],
+        preview_URL: fileReader.result
+      })
+    }
+  }
+ 
+
+  // handler 함수들
+  // 적힌 음료 이름 가져오기
+  const onTitleHandler = (e) => {
+    setTitle(e.currentTarget.value);
   };
+  // 적힌 레시피 내용 가져오기
+  const onRecipeHandler = (e) => {
+    setRecipe(e.currentTarget.value);
+  };
+  // 적힌 내용 저장하고 메인으로 이동
+  const onSubmitHandler = async() => {
+
+    if(imgUrl.img_file){
+      const formData = new FormData()
+      formData.append('imgUrl', imgUrl.img_file);
+      // for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
+      await axios.post('/api/imageTest', formData,{
+        headers:{
+          'content-type': 'multipart/form-data'
+        }
+      });
+      alert("서버에 등록이 완료되었습니다!");
+      setImgUrl({
+        img_file: imgUrl.img_file,
+        preview_URL: imgUrl.img_file
+      })
+    }
+    let date = new Date().toString().slice(0,21).split(' ').join('')
+    dispatch(addPostDB(
+      {
+       postId: title+date,
+      //  editor: ,
+       imgUrl: imgUrl.img_file ? imgUrl.img_file : '',
+       preview_URL: imgUrl.preview_URL,
+       title: title ? title: '',
+       content: recipe ? recipe : ''
+     }
+   ))
+
+    navigate(`/`)
+  
+};
+// id: param,
+const onModifyHandler = () => {
+  dispatch(modifyPostDB(
+    { 
+      
+      imgUrl: imgUrl.img_file ? imgUrl.img_file : '',
+      preview_URL: imgUrl.preview_URL,
+      title: title,
+      recipe: recipe
+    },
+    param
+  ))
+}
+ 
 
   return (
     <div className="container_write">
-      {/* style={{marginTop:'10em'}}> */}
-      {/* <h1 style={{}}>게시글 작성</h1> */}
 
       {/* 이미지 업로드 버튼 */}
       <div className="wrap">
       <label>
         
         <div style=
-        {imgUrl ? {
+        {imgUrl.imgUrl ? {
         display:'none'
         }
         :
@@ -32,18 +135,24 @@ const Write = () => {
         }}>
         <AddPhotoAlternateIcon style={{ cursor: "pointer", color:'#222'}} />
         <span style={{color:'#222', marginLeft:'0.5em',cursor: "pointer"}}>사진올리기</span>
+        <form style={{ display: "none" }}>
+          <label htmlFor="file">
         <input
           type="file"
-          id="input-file"
-          onChange={preview}
+          id="file"
+          name="file"
+          accept="image/*"
+          onChange={saveImage}
           style={{ display: "none" }}
         ></input>
+        </label>
+        </form>
         </div>
 
         {/* 이미지 미리보기 */}
-        {imgUrl ? 
+        {imgUrl.img_file ? 
         <div>
-          <img src ={imgUrl}
+          <img src ={imgUrl.preview_URL}
             style={{
               width: "400px",
               height: "400px",
@@ -68,19 +177,31 @@ const Write = () => {
         type="text"
         placeholder="나만의 음료 이름을 적어주세요"
         className="input_3"
+        defaultValue={title}
+        onChange={onTitleHandler}
       ></input>
       <textarea
+        defaultValue={recipe}
         className="textarea"
         placeholder="나만의 레시피를 남겨주세요"
+        onChange={onRecipeHandler}
       ></textarea>
 
       {/* 작성 완료 */}
       <div>
+        {is_edit ?
+        <Link to={`/write/detail/${param}`}>
+          <button className="write_btn1" value="작성 완료" onClick={onModifyHandler}>
+            수정 완료
+          </button>
+        </Link>
+        :
         <Link to="/">
-          <button className="write_btn1" value="작성 완료">
+          <button className="write_btn1" value="작성 완료" onClick={onSubmitHandler}>
             작성 완료
           </button>
         </Link>
+        }
       </div>
     </div>
     </div>

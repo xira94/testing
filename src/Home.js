@@ -1,8 +1,13 @@
 import React from "react";
 import "./css/Home.css";
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { loadPostDB } from './redux/moduels/post'
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
@@ -10,6 +15,19 @@ const Home = () => {
     navigate("/Write");
   };
   // const is_login = useSelector((state) => state.user.is_login);
+=======
+
+const Home = () => {
+  const dispatch = useDispatch();
+
+  React.useEffect(()=> {
+    dispatch(loadPostDB());
+  }, [])
+
+  const data = useSelector(state => state.post.posts)
+  // console.log(data)
+
+>>>>>>> master
   return (
     <div className="main">
       <h1>Top5</h1>
@@ -71,15 +89,16 @@ const Home = () => {
       <div className="board">
         <div className="board_title">
           <h3>Board</h3>
-          <div className="btn_post">
+          <Link to ='/write'><div className="btn_post">
             <FontAwesomeIcon
               size="2x"
-              color="rgb(48, 163, 63)"
+              color="#186d51"
               icon={faCirclePlus}
               onClick={toWrite}
             />
-          </div>
+          </div></Link>
         </div>
+<<<<<<< HEAD
         <div className="img_collection">
           <div className="img_home">
             <img
@@ -132,6 +151,28 @@ const Home = () => {
             </div>
           </div>
         </div>
+=======
+      <div className="img_collection">
+
+      {data.length !==0 && data.map((list,i)=> {
+        return (
+        <div className="img_home" key={i}>
+          <Link to = {`write/detail/${data[i].postId}`}>
+          <img
+            alt={data.length !==0 && data[i].title}
+            src="https://target.scene7.com/is/image/Target/GUEST_b75d74b7-e711-4bc5-9eb1-d0577622b3e2?wid=488&hei=488&fmt=pjpeg"
+          ></img>
+          </Link>
+          <div className="inner_image">
+            <p>{data.length !==0 && data[i].title}</p>
+            <FontAwesomeIcon size="lg" color="pink" icon={faHeart} />
+          </div>
+        </div>
+        )
+        })
+      }
+      </div>
+>>>>>>> master
       </div>
     </div>
   );
