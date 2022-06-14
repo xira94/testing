@@ -17,7 +17,7 @@ const Detail = () => {
       </div>
       <h1>Drop Caps</h1>
       <hr />
-      <div class="container">
+      <div className="container">
         <p>
           Drop cap or dropped capital is a large capital letter used as a
           decorative element at the beginning of a paragraph or section. The
@@ -34,9 +34,9 @@ const Detail = () => {
       <section>
         {/* <div class="container"> */}
         <div className="row">
-          <div class="col-sm-5 col-md-6 col12 pb-4">
+          <div className="col-sm-5 col-md-6 col12 pb-4">
             <h2>Comments</h2>
-            <div class="text-justify darker mt-4 float-right">
+            <div className="text-justify darker mt-4 float-right">
               <h4>Jhon Doe</h4>
               {/* <span>- 20 October, 2018</span> */}
               <p>
@@ -44,7 +44,7 @@ const Detail = () => {
                 Accusamus numquam assumenda hic aliquam vero sequi velit
               </p>
             </div>
-            <div class="text-justify darker mt-4 float-right">
+            <div className="text-justify darker mt-4 float-right">
               <h4>Rob Simpson</h4>
               {/* <span>- 20 October, 2018</span> */}
               <p>
@@ -55,10 +55,14 @@ const Detail = () => {
           </div>
         </div>
       </section>
-      <section class="data-search">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Comment"></input>
-          <button type="button" class="btn">
+      <section className="data-search">
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Comment"
+          ></input>
+          <button type="button" className="btn">
             Submit
           </button>
         </div>

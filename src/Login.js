@@ -61,7 +61,7 @@ const Login = () => {
           {/* <input type="submit" value="로그인" /> */}
           <button onClick={handleLogin}>로그인</button>
         </form>
-        <div class="actions">
+        <div className="actions">
           <a href="javascript:void(0)">
             아직 회원이 아니신가요? <u>회원가입 하기</u>
           </a>
