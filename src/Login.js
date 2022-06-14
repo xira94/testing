@@ -37,11 +37,9 @@ const Login = () => {
     dispatch(loginDB(email, password));
   };
 
-
   // React.useEffect(()=> {
   //   dispatch(loadUserDB());
   // }, [])
-  
 
   return (
     <section className="login">
@@ -71,7 +69,12 @@ const Login = () => {
         </form>
 
         <div className="actions">
-          아직 회원이 아니신가요? <u>회원가입 하기</u>
+          <a href="javascript:void(0)">
+            아직 회원이 아니신가요? <u>회원가입 하기</u>
+          </a>
+
+          {/* <div className="actions">
+          아직 회원이 아니신가요? <u>회원가입 하기</u> */}
         </div>
       </div>
     </section>
