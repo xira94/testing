@@ -81,7 +81,7 @@ export const logincheckDB = () => {
       .then((response) => {
         console.log(response);
 
-        localStorage.setItem("loginUserId", response.data.userId);
+        // localStorage.setItem("loginUserId", response.data.userId);
         localStorage.setItem("loginUserName", response.data.nickname);
 
         dispatch(LOGIN_CHECK(response.data.userId, response.data.nickname));
@@ -96,10 +96,9 @@ export const idCheckFB = (userId) => {
   console.log(userId);
   return async function () {
     const _idCheck = await instance
-      .get(`/api/user/dup_userId/${userId}`)
+      .get(`/api/user//${userId}`)
       .then((response) => {
         console.log(response);
-
         const message = response.data.message;
         window.alert(message);
       })
@@ -115,7 +114,7 @@ export const nicknameCheckFB = (nickname) => {
   console.log(nickname);
   return async function () {
     const _nicknameCheck = await instance
-      .get(`/api/user/dup_nickname/${nickname}`)
+      .get(`/api/user//${nickname}`)
       .then((response) => {
         console.log(response);
 
