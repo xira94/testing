@@ -92,7 +92,7 @@ const Home = () => {
       {data.length !==0 && data.map((list,i)=> {
         return (
         <div className="img_home" key={i}>
-          <Link to = {`write/detail/${data[i].postId}`}>
+          <Link to = {`write/detail/${data[i]._id}`}>
           <img
             alt={data.length !==0 && data[i].title}
             src="https://target.scene7.com/is/image/Target/GUEST_b75d74b7-e711-4bc5-9eb1-d0577622b3e2?wid=488&hei=488&fmt=pjpeg"

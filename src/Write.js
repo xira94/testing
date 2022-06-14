@@ -73,9 +73,9 @@ const Write = () => {
 
     if(imgUrl.img_file){
       const formData = new FormData()
-      formData.append('imgUrl', imgUrl.img_file);
+      formData.append('imageTest', imgUrl.img_file);
       // for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
-      await axios.post('/api/imageTest', formData,{
+      await axios.post('/api/posts', formData,{
         headers:{
           'content-type': 'multipart/form-data'
         }
@@ -86,10 +86,10 @@ const Write = () => {
         preview_URL: imgUrl.img_file
       })
     }
-    let date = new Date().toString().slice(0,21).split(' ').join('')
+    // let date = new Date().toString().slice(0,21).split(' ').join('')
     dispatch(addPostDB(
       {
-       postId: title+date,
+      //  postId: title+date,
       //  editor: ,
        imgUrl: imgUrl.img_file ? imgUrl.img_file : '',
        preview_URL: imgUrl.preview_URL,
@@ -102,14 +102,30 @@ const Write = () => {
   
 };
 // id: param,
-const onModifyHandler = () => {
+const onModifyHandler = async() => {
+  
+  if(imgUrl.img_file){
+    const formData = new FormData()
+    formData.append('imageTest', imgUrl.img_file);
+    // for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
+    await axios.post('/api/posts', formData,{
+      headers:{
+        'content-type': 'multipart/form-data'
+      }
+    });
+    alert("서버에 등록이 완료되었습니다!");
+    setImgUrl({
+      img_file: imgUrl.img_file,
+      preview_URL: imgUrl.img_file
+    })
+  }
+
   dispatch(modifyPostDB(
     { 
-      
       imgUrl: imgUrl.img_file ? imgUrl.img_file : '',
       preview_URL: imgUrl.preview_URL,
       title: title,
-      recipe: recipe
+      content: recipe
     },
     param
   ))
