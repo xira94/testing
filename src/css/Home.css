@@ -10,9 +10,14 @@
 }
 .img_collection {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  align-content: flex-start;
+  
   margin-top: 50px;
+  flex-wrap: wrap;
+  width:1600px;
+}
+.img_collection:nth-of-type(1){
+  justify-content: center;
 }
 .img_home {
   display: flex;

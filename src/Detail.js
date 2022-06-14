@@ -2,8 +2,15 @@ import React from "react";
 import "./css/Detail.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
+import {Link,useParams} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { deletePostDB } from "./redux/moduels/post";
 
 const Detail = () => {
+  const dispatch = useDispatch();
+  const param = useParams().id;
+  
+
   return (
     <div className="Detail__container">
       <div className="img">
@@ -17,7 +24,7 @@ const Detail = () => {
       </div>
       <h1>Drop Caps</h1>
       <hr />
-      <div class="container">
+      <div className="container">
         <p>
           Drop cap or dropped capital is a large capital letter used as a
           decorative element at the beginning of a paragraph or section. The
@@ -63,6 +70,17 @@ const Detail = () => {
           </button>
         </div>
       </section>
+      <div className="buttons">
+        <Link to ={`/write/${param}`}>
+        <button type="button" className="btn">
+              수정
+        </button>
+        </Link>
+        <button type="button" className="btn"
+        onClick={()=>{dispatch(deletePostDB(param))}}>
+              삭제
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,11 +1,13 @@
 import React from "react";
 import "./css/Home.css";
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { loadPostDB } from './redux/moduels/post'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+
 const Home = () => {
   const dispatch = useDispatch();
 
@@ -77,25 +79,27 @@ const Home = () => {
       <div className="board">
         <div className="board_title">
           <h3>Board</h3>
-          <div className="btn_post">
+          <Link to ='/write'><div className="btn_post">
             <FontAwesomeIcon
               size="2x"
-              color="rgb(48, 163, 63)"
+              color="#186d51"
               icon={faCirclePlus}
             />
-          </div>
+          </div></Link>
         </div>
       <div className="img_collection">
 
       {data.length !==0 && data.map((list,i)=> {
         return (
         <div className="img_home" key={i}>
+          <Link to = {`write/detail/${data[i].postId}`}>
           <img
-            alt={data && data[i].title}
+            alt={data.length !==0 && data[i].title}
             src="https://target.scene7.com/is/image/Target/GUEST_b75d74b7-e711-4bc5-9eb1-d0577622b3e2?wid=488&hei=488&fmt=pjpeg"
           ></img>
+          </Link>
           <div className="inner_image">
-            <p>{data && data[i].title}</p>
+            <p>{data.length !==0 && data[i].title}</p>
             <FontAwesomeIcon size="lg" color="pink" icon={faHeart} />
           </div>
         </div>

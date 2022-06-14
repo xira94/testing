@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import { useDispatch } from 'react-redux';
 // import {useNavigate} from 'react-router-dom';
-// import { registerUser } from './redux/module/user';
+// import { registerUser } from './redux/moduels/user';
 import "./css/Signup.css";
 
 

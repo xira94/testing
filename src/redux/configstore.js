@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import post from './moduels/post'
+import post from "./moduels/post";
 import user from "./moduels/user";
 
 const middlewares = [thunk];
