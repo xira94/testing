@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/Home.css";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, useNavigate } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getPostListDB } from './redux/moduels/post'
 
@@ -10,14 +10,20 @@ import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
+
     dispatch(getPostListDB());
+
   }, [dispatch]);
 
   const data = useSelector(state => state.post.posts)
   console.log(data)
 
+  const toWrite = () => {
+    navigate("/write");
+  };
   return (
     <div className="main">
       <h1>Top5</h1>

@@ -7,18 +7,27 @@ import Header from "./Header";
 import Write from "./Write";
 import Signup from "./Signup";
 import Login from "./Login";
+// import {useDispatch}
 
 function App() {
+  // const dispatch = useDispatch();
+  // const localStoragetokenCheck = localStorage.getItem("token");
+  // React.useEffect(() => {
+  //   if (localStoragetokenCheck) {
+  //     dispatch(logincheckFB());
+  //   }
+  // }, []);
+
   return (
     <div className="App">
-      <Header/>
+      <Header />
       <Routes>
-        <Route exact path="/" element={<Home/>} />
+        <Route exact path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/write" element={<Write/>} />
-        <Route path="/write/:id" element={<Write/>}/>
-        <Route path="/write/detail/:id" element={<Detail/>}/>
+        <Route path="/login" element={<Login />} />
+        <Route path="/write" element={<Write />} />
+        <Route path="/write/:id" element={<Write />} />
+        <Route path="/write/detail/:id" element={<Detail />} />
       </Routes>
     </div>
   );

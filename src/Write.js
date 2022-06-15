@@ -60,7 +60,7 @@ const Write = () => {
         const {
             currentTarget: { result },
         } = finishiedEvent;
-        setAttachment(result);
+        // setAttachment(result);
     };
 };
 
@@ -177,7 +177,7 @@ const onModifyHandler = async() => {
         <AddPhotoAlternateIcon style={{ cursor: "pointer", color:'#222'}} />
         <span style={{color:'#222', marginLeft:'0.5em',cursor: "pointer"}}>사진올리기</span>
         <form style={{ display: "none" }}>
-          <label htmlFor="file-input">
+          <label htmlFor="file">
         <input
           ref={fileInput}
           type="file"
