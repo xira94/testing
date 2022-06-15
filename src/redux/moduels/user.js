@@ -30,7 +30,7 @@ export const signupDB = (userId, nickname, password) => {
   return async function (dispatch, getState) {
     //naigate 써주고, 이게 window.location.assign이고 난 필요없고.
     await axios
-      .post("http://localhost:5001/signup", {
+      .post("http://sparta-swan.shop/api/register", {
         userId: userId,
         nickname: nickname,
         password: password,
@@ -52,8 +52,9 @@ export const signupDB = (userId, nickname, password) => {
 
 export const loginDB = (userId, password) => {
   return async function (dispatch) {
+    console.log('들어옵뉘까')
     await axios
-      .post("http://localhost:5001/login", {
+      .post("http://sparta-swan.shop/api/login", {
         userId: userId,
         password: password,
       })
@@ -61,7 +62,7 @@ export const loginDB = (userId, password) => {
         console.log(userId);
         localStorage.setItem("token", user.data.token);
         dispatch(logInUser());
-        dispatch(logincheckDB());
+        // dispatch(logincheckDB());
         window.alert("환영합니다!");
         window.location.assign("/");
       })
@@ -74,29 +75,29 @@ export const loginDB = (userId, password) => {
   };
 };
 
-export const logincheckDB = () => {
-  return async function (dispatch) {
-    const _logincheck = await instance
-      .get("http://localhost:5001/logincheck")
-      .then((response) => {
-        console.log(response);
+// export const logincheckDB = () => {
+//   return async function (dispatch) {
+//     const _logincheck = await instance
+//       .get("http://sparta-swan.shop/logincheck")
+//       .then((response) => {
+//         console.log(response);
 
-        // localStorage.setItem("loginUserId", response.data.userId);
-        localStorage.setItem("loginUserName", response.data.nickname);
+//         // localStorage.setItem("loginUserId", response.data.userId);
+//         localStorage.setItem("loginUserName", response.data.nickname);
 
-        dispatch(LOGIN_CHECK(response.data.userId, response.data.nickname));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-};
+//         dispatch(LOGIN_CHECK(response.data.userId, response.data.nickname));
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//       });
+//   };
+// };
 
 export const idCheckFB = (userId) => {
   console.log(userId);
   return async function () {
     const _idCheck = await instance
-      .get(`/api/user//${userId}`)
+      .get(`/api/user/${userId}`)
       .then((response) => {
         console.log(response);
         const message = response.data.message;
@@ -114,7 +115,7 @@ export const nicknameCheckFB = (nickname) => {
   console.log(nickname);
   return async function () {
     const _nicknameCheck = await instance
-      .get(`/api/user//${nickname}`)
+      .get(`/api/user/${nickname}`)
       .then((response) => {
         console.log(response);
 

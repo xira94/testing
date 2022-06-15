@@ -8,7 +8,7 @@ import "./css/Login.css";
 const Login = () => {
   const dispatch = useDispatch();
 
-  const [email, setEmail] = useState("");
+  const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
 
   const emailCheck = (email) => {
@@ -25,16 +25,17 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-    if (email === "" || password === "") {
-      window.alert("이메일,비밀번호 모두 입력해주세요.");
-    }
-    if (!emailCheck) {
-      window.alert("이메일 형식에 맞게 작성해주세요요");
-    }
-    if (!passwordCheck(password)) {
-      window.alert("비밀번호를 형식에 맞게 입력해주세요");
-    }
-    dispatch(loginDB(email, password));
+    console.log('나와라')
+    // if (userId === "" || password === "") {
+    //   window.alert("이메일,비밀번호 모두 입력해주세요.");
+    // }
+    // if (!emailCheck) {
+    //   window.alert("이메일 형식에 맞게 작성해주세요요");
+    // }
+    // if (!passwordCheck(password)) {
+    //   window.alert("비밀번호를 형식에 맞게 입력해주세요");
+    // }
+    dispatch(loginDB(userId, password));
   };
 
   // React.useEffect(()=> {
@@ -53,7 +54,7 @@ const Login = () => {
             type="text"
             placeholder="아이디를 입력하세요."
             onChange={(e) => {
-              setEmail(e.target.value);
+              setUserId(e.target.value);
             }}
           />
           <input
@@ -69,7 +70,7 @@ const Login = () => {
         </form>
 
         <div className="actions">
-          <a href="javascript:void(0)">
+          <a>
             아직 회원이 아니신가요? <u>회원가입 하기</u>
           </a>
 

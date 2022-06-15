@@ -2,7 +2,7 @@ import React from "react";
 import "./css/Home.css";
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { loadPostDB } from './redux/moduels/post'
+import { getPostListDB } from './redux/moduels/post'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
@@ -11,11 +11,12 @@ import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 const Home = () => {
   const dispatch = useDispatch();
 
-  React.useEffect(()=> {
-    dispatch(loadPostDB());
-  }, [])
+  React.useEffect(() => {
+    dispatch(getPostListDB());
+  }, [dispatch]);
 
   const data = useSelector(state => state.post.posts)
+  console.log(data)
 
   return (
     <div className="main">
