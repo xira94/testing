@@ -8,7 +8,6 @@ import "./css/Login.css";
 const Login = () => {
   const dispatch = useDispatch();
 
-
   const [userId, setuserId] = useState("");
 
   const [password, setPassword] = useState("");
@@ -26,7 +25,6 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-
     console.log("되니?");
 
     if (userId === "" || password === "") {
@@ -38,7 +36,6 @@ const Login = () => {
     if (!passwordCheck(password)) {
       window.alert("비밀번호를 형식에 맞게 입력해주세요");
     }
-
 
     dispatch(loginDB(userId, password));
   };
@@ -59,9 +56,7 @@ const Login = () => {
             type="text"
             placeholder="아이디를 입력하세요."
             onChange={(e) => {
-
               setuserId(e.target.value);
-
             }}
           />
           <input

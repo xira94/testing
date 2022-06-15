@@ -9,7 +9,7 @@ const LOGOUT = "user/LOGOUT";
 const LOGIN_CHECK = "user/LOGIN_CHECK";
 
 const initialState = {
-  user: '',
+  user: "",
   is_login: false,
 };
 
@@ -31,7 +31,6 @@ export const signupDB = (userId, nickname, password, passwordCheck) => {
     //naigate 써주고, 이게 window.location.assign이고 난 필요없고.
     await axios
       .post("http://sparta-swan.shop/api/register", {
-
         userId: userId,
         nickname: nickname,
         password: password,
@@ -78,7 +77,6 @@ export const loginDB = (userId, password) => {
   };
 };
 
-
 // export const logincheckDB = () => {
 //   return async function (dispatch) {
 //     const _logincheck = await axios
@@ -88,7 +86,6 @@ export const loginDB = (userId, password) => {
 
 //         localStorage.setItem("loginUserId", response.data.userId);
 //         localStorage.setItem("loginUserName", response.data.nickname);
-
 
 //         dispatch(LOGIN_CHECK(response.data.userId, response.data.nickname));
 //       })
@@ -100,18 +97,15 @@ export const loginDB = (userId, password) => {
 
 export const logincheckDB = () => {
   return function (dispatch) {
-    const userId = localStorage.getItem("token");
+    const userId = localStorage.getItem("userId");
     const tokenCheck = document.cookie;
-    // console.log(userId)
-    if (userId) {
+    if (tokenCheck) {
       dispatch(logInUser({ userId: userId }));
     } else {
       dispatch(logOutUser());
     }
   };
 };
-
-
 
 export const idCheckFB = (userId) => {
   // console.log(userId);
@@ -138,7 +132,6 @@ export const idCheckFB = (userId) => {
 //       .get(`/api/user//${nickname}`)
 //       .then((response) => {
 //         console.log(response);
-
 
 //         const message = response.data.message;
 //         window.alert(message);
