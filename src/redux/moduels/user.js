@@ -53,12 +53,11 @@ export const signupDB = (userId, nickname, password, passwordCheck) => {
 };
 
 export const loginDB = (userId, password) => {
-  return async function (dispatch) {
-    console.log('들어옵뉘까')
-    await axios
-
+  return function (dispatch) {
+    console.log(userId, password)
+    window.alert(password)
+    axios
       .post("http://sparta-swan.shop/api/login", {
-
         userId: userId,
         password: password,
       })

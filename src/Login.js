@@ -52,7 +52,7 @@ const Login = () => {
         <strong>SSM</strong>
         <br />
         <span>Secret Starbucks Menu</span>
-        <form className="formm">
+        <div className="formm">
           <input
             id="id"
             type="text"
@@ -73,7 +73,7 @@ const Login = () => {
           />
           {/* <input type="submit" value="로그인" /> */}
           <button onClick={handleLogin}>로그인</button>
-        </form>
+        </div>
 
         <div className="actions">
           <a>

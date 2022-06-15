@@ -1,5 +1,5 @@
 
-import instance from '../shared/request'
+// import instance from '../shared/request'
 import axios from "axios";
 
 
@@ -9,15 +9,19 @@ const DELETE = "post/DELETE"
 const GET = "post/GET"
 
 const initialState = {
-  posts: [
-    // {
-    //   "id": "",
-    //   "name": "",
-    //   "img": "",
-    //   "title": "",
-    //   "txt": ""
-    // },
-  ],
+  // postslist: {
+  //   imageTest: "",
+  //   title: "",
+  //   content: ""
+  // },
+  // postList: [
+  //   {
+  //     postId: "",
+  //     createdAt: "",
+  //     title: "",
+      
+  //   },
+  // ],
 };
 
 // Action creator
@@ -55,9 +59,10 @@ export function getPostList(post_list){
 // }
 export const getPostListDB = () => async (dispatch) => {
   try {
-    const { data } = await axios.get("http://sparta-swan.shop/api/posts");
-    dispatch(getPostList(data.postslist));
-    console.log(data.postslist);
+    const data = await axios.get("http://sparta-swan.shop/api/posts");
+    dispatch(getPostList(data.data.postslist));
+    console.log('sadf')
+    console.log(data.data.postslist);
   } catch (error) {
     alert("오류가 발생했습니다. 다시 시도해주세요.");
     console.log(error);
@@ -67,7 +72,7 @@ export const getPostListDB = () => async (dispatch) => {
 export const addPostDB = (data) => {
   return async function (dispatch, getState) {
     await axios
-      .post("http://sparta-swan.shop/posts", data, {
+      .post("http://sparta-swan.shop/api/posts", data, {
         headers: {
           "Content-Type": "multipart/form-data",
           authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -82,40 +87,16 @@ export const addPostDB = (data) => {
   };
 };
 
-// export const addPostDB = (data) => {
-//   console.log('추가')
-//   return async function (dispatch){
-//     const post_data = await axios.post("http://sparta-swan.shop/api/posts", data)
-//     // {
-//     //   headers: {'Authorization':`Bearer ${localStorage.getItem("token")}`},
-//     // })
-//     .then(response => { console.log(response.postslist) 
-//       dispatch(addPost(post_data))
-//     })
-    
-    
-//   }
-// }
 
 export const modifyPostDB = (data, postId) => {
   return async function (dispatch, getState) {
-    const post_data = await instance
-      .put(`${postId}`, data, {
+    const post_data = await axios
+      .put(`http://sparta-swan.shop/api/posts/${postId}`, data, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((response) => {
         console.log(response);
-        // const willModifyData = response.data.filter((v,i)=> v.id === id)
-        // console.log(willModifyData) // 수정할 콘텐츠 내용 찾음
-        // willModifyData.id.replace({...post_list})
-        // console.log(willModifyData) // 수정할 내용 넣기
-        // const modified_post_list = {...post_list}
-        // console.log(modified_post_list) // 수정할 내용대로 담음
-        // // const result = [...response.data, modified_post_list];
-        // // console.log(result)
-        // // response.data.forEach(v => {
-        // //   modified_post_list.push({...v})
-        // // });
+        
         dispatch(modifyPost(post_data));
       })
       .catch((error) => {
@@ -124,22 +105,23 @@ export const modifyPostDB = (data, postId) => {
   };
 };
 
+// 게시물 삭제
 export const deletePostDB = (postId) => {
-  return async function (dispatch, getState) {
-    const post_data = await instance
-      .delete(`/api/posts/${postId}`, postId, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        params: {
-          postId: postId,
-        },
+  return async function (dispatch) {
+    await axios
+      .delete(`http://sparta-swan.shop/api/posts/${postId}`,
+      // {
+      //   headers: {
+      //     authorization: `Bearer ${localStorage.getItem("token")}`,
+      //   },
+      // }
+      )
+      .then((res) => {
+        dispatch(deletePost(postId));
+        window.location.assign("/")
       })
-      .then((response) => {
-        console.log(response);
-        const _post_list = getState().post.posts;
-        const post_id = _post_list.find((v) => {
-          return v.id === postId;
-        });
-        dispatch(deletePost(post_id));
+      .catch((error) => {
+        console.log(error);
       });
   };
 };

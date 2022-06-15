@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import { useDispatch, useSelector } from 'react-redux'
 import { addPostDB, modifyPostDB } from "./redux/moduels/post"
-import axios from 'axios';
+// import axios from 'axios';
 
 
 
@@ -20,6 +20,7 @@ const Write = () => {
   const [title, setTitle] = useState(edit_post ? edit_post.title : '');
   const [recipe, setRecipe] = useState(edit_post ? edit_post.recipe : '');
   const [imgUrl, setImgUrl] = useState(edit_post ? edit_post.img_file: "");
+  const [attachment, setAttachment] = useState(edit_post ? edit_post.imageUrl : "");
   // console.log(edit_post)
 
   // 수정 중 새로고침하면 데이터가 날아가므로 새로고침하면 강제 홈으로 이동
@@ -60,16 +61,16 @@ const Write = () => {
         const {
             currentTarget: { result },
         } = finishiedEvent;
-        // setAttachment(result);
+        setAttachment(result);
     };
 };
 
   const onSubmitHandler = () => {
-    if (recipe === "" || imgUrl === "" || title === "") {
+    if (recipe === "" || fileInput === "" || title === "") {
         window.alert('내용을 입력해주세요!')
     }
 
-    const file = imgUrl.current.files[0];
+    const file = fileInput.current.files[0];
     console.log(file);
 
     const formData = new FormData();
@@ -77,11 +78,25 @@ const Write = () => {
     formData.append("imageTest", file);
     formData.append("title", title);
     formData.append("content", recipe);
-    console.log("formData", formData);
+    // console.log("formData", formData);
 
     dispatch(addPostDB(formData));
 };
- 
+
+const onModifyHandler = () => {
+  const file = fileInput.current.files[0];
+  console.log(file);
+
+  const formData = new FormData();
+
+  formData.append("imageTest", file);
+  formData.append("title", title);
+  formData.append("content", recipe);
+  console.log("formData", formData);
+
+  dispatch(modifyPostDB(formData, param));
+};
+
 
   // handler 함수들
   // 적힌 음료 이름 가져오기
@@ -127,34 +142,34 @@ const Write = () => {
 // };
 
 // id: param,
-const onModifyHandler = async() => {
+// const onModifyHandler = async() => {
   
-  if(imgUrl.img_file){
-    const formData = new FormData()
-    formData.append('imageTest', imgUrl.img_file);
-    // for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
-    await axios.post('/api/posts', formData,{
-      headers:{
-        'content-type': 'multipart/form-data'
-      }
-    });
-    alert("서버에 등록이 완료되었습니다!");
-    setImgUrl({
-      img_file: imgUrl.img_file,
-      preview_URL: imgUrl.img_file
-    })
-  }
+//   if(imgUrl.img_file){
+//     const formData = new FormData()
+//     formData.append('imageTest', imgUrl.img_file);
+//     // for (var pair of formData.entries()) { console.log(pair[0]+ ', ' + pair[1]); }
+//     await axios.post('/api/posts', formData,{
+//       headers:{
+//         'content-type': 'multipart/form-data'
+//       }
+//     });
+//     alert("서버에 등록이 완료되었습니다!");
+//     setImgUrl({
+//       img_file: imgUrl.img_file,
+//       preview_URL: imgUrl.img_file
+//     })
+//   }
 
-  dispatch(modifyPostDB(
-    { 
-      imgUrl: imgUrl.img_file ? imgUrl.img_file : '',
-      preview_URL: imgUrl.preview_URL,
-      title: title,
-      content: recipe
-    },
-    param
-  ))
-}
+//   dispatch(modifyPostDB(
+//     { 
+//       imgUrl: imgUrl.img_file ? imgUrl.img_file : '',
+//       preview_URL: imgUrl.preview_URL,
+//       title: title,
+//       content: recipe
+//     },
+//     param
+//   ))
+// }
  
 
   return (
@@ -165,7 +180,7 @@ const onModifyHandler = async() => {
       <label>
         
         <div style=
-        {imgUrl.imgUrl ? {
+        {attachment ? {
         display:'none'
         }
         :
@@ -193,9 +208,9 @@ const onModifyHandler = async() => {
         </div>
 
         {/* 이미지 미리보기 */}
-        {imgUrl.img_file ? 
+        {attachment ? 
         <div>
-          <img src ={imgUrl.preview_URL}
+          <img src ={attachment}
             style={{
               width: "400px",
               height: "400px",

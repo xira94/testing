@@ -1,7 +1,7 @@
 import React from "react";
 import "./css/Home.css";
-import { useDispatch, useSelector, useNavigate } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector,  } from 'react-redux';
+import { Link  } from 'react-router-dom';
 import { getPostListDB } from './redux/moduels/post'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,7 @@ import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   React.useEffect(() => {
 
@@ -21,9 +21,9 @@ const Home = () => {
   const data = useSelector(state => state.post.posts)
   console.log(data)
 
-  const toWrite = () => {
-    navigate("/write");
-  };
+  // const toWrite = () => {
+  //   navigate("/write");
+  // };
   return (
     <div className="main">
       <h1>Top5</h1>
@@ -95,13 +95,13 @@ const Home = () => {
         </div>
       <div className="img_collection">
 
-      {data.length !==0 && data.map((list,i)=> {
+      {data  && data.map((list,i)=> {
         return (
         <div className="img_home" key={i}>
           <Link to = {`write/detail/${data[i]._id}`}>
           <img
             alt={data.length !==0 && data[i].title}
-            src={data[i].imageUrl}
+            src={`http://sparta-swan.shop/${data[i].imageUrl}`}
           ></img>
           </Link>
           <div className="inner_image">
