@@ -40,7 +40,7 @@ const Write = () => {
   },[edit_post])
 
   console.log(file)
-  
+
   // 수정 중 새로고침하면 데이터가 날아가므로 새로고침하면 강제 홈으로 이동
   React.useEffect(()=> {
     if(is_edit && !edit_post){
@@ -83,11 +83,23 @@ const Write = () => {
 
 const onModifyHandler = () => {
   
-  dispatch(modifyPostDB({
-    title: title,
-    imgUrl: attachment,
-    content: recipe
-  }, param ));
+  const _file = fileInput.current.files[0];
+    console.log(_file);
+
+    const formData = new FormData();
+
+    formData.append("imageTest", _file);
+    formData.append("title", title);
+    formData.append("content", recipe);
+    // console.log("formData", formData);
+
+    dispatch(modifyPostDB(formData,param));
+
+  // dispatch(modifyPostDB({
+  //   title: title,
+  //   imgUrl: attachment,
+  //   content: recipe
+  // }, param ));
 };
 
 

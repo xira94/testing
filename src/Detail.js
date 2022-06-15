@@ -36,9 +36,7 @@ const Detail = (props) => {
 
 
   const onDeleteHandler = () => {
-
     dispatch(deletePostDB(param))
-    
 };
   
 
