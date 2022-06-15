@@ -1,6 +1,5 @@
 // user.js
 import axios from "axios";
-import instance from "../../shared/request";
 
 // Actions
 
@@ -26,15 +25,16 @@ export function logincheck(userId, nickname) {
 }
 
 //middlewares;
-export const signupDB = (userId, nickname, password) => {
+export const signupDB = (userId, nickname, password, passwordCheck) => {
+  console.log(userId, nickname, password, passwordCheck);
   return async function (dispatch, getState) {
     //naigate 써주고, 이게 window.location.assign이고 난 필요없고.
     await axios
-      .post("http://localhost:5001/signup", {
+      .post("sparta-swan.shop/api/register", {
         userId: userId,
         nickname: nickname,
         password: password,
-        // passwordCheck: passwordCheck,
+        passwordCheck: passwordCheck,
       })
       .then((user) => {
         console.log(user);
@@ -44,6 +44,7 @@ export const signupDB = (userId, nickname, password) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log("최현준");
         window.alert("회원가입에 실패했습니다! 다시 시도해주세요");
         console.log(errorCode, errorMessage);
       });
@@ -53,7 +54,7 @@ export const signupDB = (userId, nickname, password) => {
 export const loginDB = (userId, password) => {
   return async function (dispatch) {
     await axios
-      .post("http://localhost:5001/login", {
+      .post("", {
         userId: userId,
         password: password,
       })
@@ -76,12 +77,12 @@ export const loginDB = (userId, password) => {
 
 export const logincheckDB = () => {
   return async function (dispatch) {
-    const _logincheck = await instance
-      .get("http://localhost:5001/logincheck")
+    const _logincheck = await axios
+      .get("")
       .then((response) => {
         console.log(response);
 
-        // localStorage.setItem("loginUserId", response.data.userId);
+        localStorage.setItem("loginUserId", response.data.userId);
         localStorage.setItem("loginUserName", response.data.nickname);
 
         dispatch(LOGIN_CHECK(response.data.userId, response.data.nickname));
@@ -92,42 +93,42 @@ export const logincheckDB = () => {
   };
 };
 
-export const idCheckFB = (userId) => {
-  console.log(userId);
-  return async function () {
-    const _idCheck = await instance
-      .get(`/api/user//${userId}`)
-      .then((response) => {
-        console.log(response);
-        const message = response.data.message;
-        window.alert(message);
-      })
-      .catch((error) => {
-        console.error(error);
-        const error_message = error.response.data.errorMessage;
-        window.alert(error_message);
-      });
-  };
-};
+// export const idCheckFB = (userId) => {
+//   console.log(userId);
+//   return async function () {
+//     const _idCheck = await instance
+//       .get(`/api/user//${userId}`)
+//       .then((response) => {
+//         console.log(response);
+//         const message = response.data.message;
+//         window.alert(message);
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//         const error_message = error.response.data.errorMessage;
+//         window.alert(error_message);
+//       });
+//   };
+// };
 
-export const nicknameCheckFB = (nickname) => {
-  console.log(nickname);
-  return async function () {
-    const _nicknameCheck = await instance
-      .get(`/api/user//${nickname}`)
-      .then((response) => {
-        console.log(response);
+// export const nicknameCheckFB = (nickname) => {
+//   console.log(nickname);
+//   return async function () {
+//     const _nicknameCheck = await instance
+//       .get(`/api/user//${nickname}`)
+//       .then((response) => {
+//         console.log(response);
 
-        const message = response.data.message;
-        window.alert(message);
-      })
-      .catch((error) => {
-        console.error(error);
-        const error_message = error.response.data.errorMessage;
-        window.alert(error_message);
-      });
-  };
-};
+//         const message = response.data.message;
+//         window.alert(message);
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//         const error_message = error.response.data.errorMessage;
+//         window.alert(error_message);
+//       });
+//   };
+// };
 
 export const logoutDB = () => {
   return function (dispatch) {

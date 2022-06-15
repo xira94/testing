@@ -12,14 +12,18 @@ import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     dispatch(loadPostDB());
-  }, []);
+  }, [dispatch]);
 
   const data = useSelector((state) => state.post.posts);
   // console.log(data)
 
+  const toWrite = () => {
+    navigate("/write");
+  };
   return (
     <div className="main">
       <h1>Top5</h1>

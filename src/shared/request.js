@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://3.34.42.87:3000",
+  baseURL: "http://sparta-swan.shop/",
   timeout: 1000,
   headers: { Authorization: "Bearer " + localStorage.getItem("token") },
 });
