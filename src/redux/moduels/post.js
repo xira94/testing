@@ -17,8 +17,8 @@ const initialState = {
 export function addPost(post){
   return {type: ADD, post}
 }
-export function modifyPost(post, postID){
-  return {type: MODIFY, post, postID }
+export function modifyPost(post){
+  return {type: MODIFY, post}
 }
 export function deletePost(postID){
   return {type: DELETE, postID}
@@ -63,17 +63,46 @@ export const addPostDB = (data) => {
 
 export const modifyPostDB = (data, postId) => {
   return async function (dispatch, getState) {
+    console.log(data, postId)
+    // console.log(getState().post.posts)
+    const _data = [...getState().post.posts]
+    console.log(_data)
     const post_data = await axios
-      .put(`http://sparta-swan.shop/api/posts/${postId}` , data, {
+      .patch(`http://sparta-swan.shop/api/posts/${postId}` , data, 
+      {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((response) => {
         console.log(response);
+        _data.map((v,i)=>{
+          if(v._id === postId){
+            const _v = {...data, _id: v._id}
+            return _v
+          }
+          
+          return v;
+
+        })
+        console.log(_data)
         
-        dispatch(modifyPost(post_data));
+
+        dispatch(modifyPost(_data));
       })
       .catch((error) => {
         console.log(error);
+        const __data = _data.map((v,i)=>{
+          if(v._id === postId){
+            console.log(v)
+            const _v = {...data, _id: v._id}
+            return _v
+          }
+          
+          return v;
+
+        })
+        console.log(__data)
+
+        dispatch(modifyPost(__data));
       });
   };
 };
@@ -114,7 +143,9 @@ export default function reducer(state = initialState, action={}){
 
     }
     case "post/MODIFY": {
-      const modify_post = [{ ...action.post_list }];
+      
+      const modify_post = [ ...action.post ];
+      console.log(modify_post)
       return { posts: modify_post };
     }
 

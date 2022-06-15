@@ -30,9 +30,17 @@ const Write = () => {
   const [title, setTitle] = useState(edit_post ? edit_post.title : '');
   const [recipe, setRecipe] = useState(edit_post ? edit_post.content : '');
   const [attachment, setAttachment] = useState(edit_post ? `http://sparta-swan.shop/${edit_post.imageUrl}` : "");
+  const [file, setFile] = useState();
   console.log(edit_post)
   
+  React.useEffect (()=> {
+    if((edit_post !== null) && is_edit){
+      setFile(edit_post.imageUrl)
+    }
+  },[edit_post])
 
+  console.log(file)
+  
   // 수정 중 새로고침하면 데이터가 날아가므로 새로고침하면 강제 홈으로 이동
   React.useEffect(()=> {
     if(is_edit && !edit_post){
@@ -45,6 +53,7 @@ const Write = () => {
     const reader = new FileReader();
     const theFile = fileInput.current.files[0];
     console.log(theFile);
+    setFile(theFile)
     reader.readAsDataURL(theFile);
     reader.onloadend = (finishiedEvent) => {
         const {
@@ -59,12 +68,12 @@ const Write = () => {
         window.alert('내용을 입력해주세요!')
     }
 
-    const file = fileInput.current.files[0];
-    console.log(file);
+    const _file = fileInput.current.files[0];
+    console.log(_file);
 
     const formData = new FormData();
 
-    formData.append("imageTest", file);
+    formData.append("imageTest", _file);
     formData.append("title", title);
     formData.append("content", recipe);
     // console.log("formData", formData);
@@ -73,17 +82,12 @@ const Write = () => {
 };
 
 const onModifyHandler = () => {
-  const file = fileInput.current.files[0];
-  console.log(file);
-
-  const formData = new FormData();
-
-  formData.append("imageTest", file);
-  formData.append("title", title);
-  formData.append("content", recipe);
-  console.log("formData", formData);
-
-  dispatch(modifyPostDB(formData, param));
+  
+  dispatch(modifyPostDB({
+    title: title,
+    imgUrl: attachment,
+    content: recipe
+  }, param ));
 };
 
 

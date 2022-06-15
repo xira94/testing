@@ -2,9 +2,11 @@
 import axios from "axios";
 
 // Actions
+
 // const ACCOUNT = "user/ACCOUNT";
 const LOGIN = "user/LOGIN";
 const LOGOUT = "user/LOGOUT";
+const LOGIN_CHECK = "user/LOGIN_CHECK";
 
 const initialState = {
   user: '',
@@ -12,23 +14,28 @@ const initialState = {
 };
 
 // Action Creators
-
 export function logInUser(user) {
   return { type: LOGIN, user };
 }
 export function logOutUser(user) {
   return { type: LOGOUT, user };
 }
+export function logincheck(userId, nickname) {
+  return { type: LOGIN_CHECK, userId, nickname };
+}
 
-// middlewares
-
-export const signupDB = (userId, nickname, password) => {
+//middlewares;
+export const signupDB = (userId, nickname, password, passwordCheck) => {
+  console.log(userId, nickname, password, passwordCheck);
   return async function (dispatch, getState) {
+    //naigate 써주고, 이게 window.location.assign이고 난 필요없고.
     await axios
       .post("http://sparta-swan.shop/api/register", {
+
         userId: userId,
-        nickName: nickname,
+        nickname: nickname,
         password: password,
+        passwordCheck: passwordCheck,
       })
       .then((user) => {
         console.log(user);
@@ -38,6 +45,7 @@ export const signupDB = (userId, nickname, password) => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log("최현준");
         window.alert("회원가입에 실패했습니다! 다시 시도해주세요");
         console.log(errorCode, errorMessage);
       });
@@ -45,16 +53,10 @@ export const signupDB = (userId, nickname, password) => {
 };
 
 export const loginDB = (userId, password) => {
-<<<<<<< HEAD
   return function (dispatch) {
     // console.log(userId, password)
     // window.alert(password)
     axios
-=======
-  return async function (dispatch) {
-    await axios
-
->>>>>>> 44e33651e636bbe3ca6d198222c11df2313b212c
       .post("http://sparta-swan.shop/api/login", {
         userId: userId,
         password: password,
@@ -62,26 +64,20 @@ export const loginDB = (userId, password) => {
       .then((user) => {
         console.log(userId);
         localStorage.setItem("token", user.data.token);
-
-        dispatch(
-          logInUser({
-            userId: userId,
-          })
-        );
-
+        dispatch(logInUser());
+        // dispatch(logincheckDB());
         window.alert("환영합니다!");
         window.location.assign("/");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        window.alert("로그인에 실패했습니다! 다시 시도해주세요");
+        window.alert("로그인에 실패했습니다! 다시 시도해주세요요");
         console.log(errorCode, errorMessage);
       });
   };
 };
 
-<<<<<<< HEAD
 
 // export const logincheckDB = () => {
 //   return async function (dispatch) {
@@ -101,8 +97,7 @@ export const loginDB = (userId, password) => {
 //       });
 //   };
 // };
-=======
->>>>>>> 44e33651e636bbe3ca6d198222c11df2313b212c
+
 export const logincheckDB = () => {
   return function (dispatch) {
     const userId = localStorage.getItem("token");
@@ -117,7 +112,6 @@ export const logincheckDB = () => {
 };
 
 
-<<<<<<< HEAD
 
 export const idCheckFB = (userId) => {
   // console.log(userId);
@@ -128,9 +122,6 @@ export const idCheckFB = (userId) => {
         console.log(response);
         const message = response.data.message;
         window.alert(message);
-=======
-        dispatch(LOGIN_CHECK(response.data.userId, response.data.nickname));
->>>>>>> 44e33651e636bbe3ca6d198222c11df2313b212c
       })
       .catch((error) => {
         console.error(error);
@@ -140,7 +131,6 @@ export const idCheckFB = (userId) => {
   };
 };
 
-<<<<<<< HEAD
 // export const nicknameCheckFB = (nickname) => {
 //   console.log(nickname);
 //   return async function () {
@@ -161,13 +151,12 @@ export const idCheckFB = (userId) => {
 //   };
 // };
 
-=======
->>>>>>> 44e33651e636bbe3ca6d198222c11df2313b212c
 export const logoutDB = () => {
   return function (dispatch) {
-    localStorage.clear();
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("is_login");
     dispatch(logOutUser());
-    window.location.assign("/");
   };
 };
 
@@ -176,13 +165,14 @@ export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOGIN:
       state.user = { ...action.user };
-      console.log(state.user);
       state.is_login = true;
       return state;
     case LOGOUT:
       state.user = {};
       state.is_login = false;
       return state;
+    case LOGIN_CHECK:
+      return { userId: action.userId, nickname: action.nickname };
     default:
       return state;
   }
