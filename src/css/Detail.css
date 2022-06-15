@@ -23,12 +23,14 @@
 }
 
 body h1 {
-  color: rgb(26, 25, 25);
-  font-weight: 600;
+  /* color: rgb(30, 126, 54); */
+  color: rgb(27, 88, 79);
+  font-weight: 700;
   margin-top: 0.5em;
 }
 body h2 {
   text-align: left;
+  margin-top:20px;
 }
 body hr {
   width: 80px;
@@ -47,9 +49,13 @@ body hr {
   line-height: 1.5;
   letter-spacing: 0.3px;
   word-spacing: 2px;
+  text-decoration: underline;
+  color:#222;
+  margin:10px 40px;
 }
 
-.container p:first-child::first-letter {
+
+/* .container p:first-child::first-letter {
   color: rgb(30, 126, 54);
   font-weight: bold;
   font-size: 70px;
@@ -57,7 +63,7 @@ body hr {
   line-height: 60px;
   padding-right: 8px;
   margin-top: -3px;
-}
+} */
 
 @media screen and (max-width: 600px) {
   .container {
@@ -160,6 +166,7 @@ body {
 .comments {
   margin-top: 5%;
   margin-left: 20px;
+  
 }
 
 .darker {
@@ -169,7 +176,8 @@ body {
   border-radius: 5px;
   padding-left: 40px;
   padding-right: 30px;
-  padding-top: 10px;
+  padding-top: 15px;
+  
 }
 
 .comment {
@@ -219,6 +227,7 @@ form {
   background-color: rgba(16, 46, 46, 0.973);
   border-radius: 5px;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 /* section2  */
@@ -257,9 +266,12 @@ input.form-control {
 }
 
 .btn {
-  background-color: #186d51;
+  background-color: rgb(27, 88, 79);
+  border-left:1px solid #fff;
   color: #ffffff;
   cursor: pointer;
+  border-radius: 0;
+  box-sizing: border-box;
 }
 
 select:hover {
@@ -281,6 +293,16 @@ select:hover {
 }
 .form-control::placeholder {
   color: #4ecca3;
+  padding:10px;
+}
+
+.buttons{
+  margin:15px;
+}
+.buttons .btn{
+  margin:10px;
+  padding:0 20px;
+  border-radius: 10px;
 }
 
 @keyframes popUp {

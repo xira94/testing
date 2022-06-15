@@ -8,15 +8,15 @@ header {
   z-index: 99;
 }
 .header__container {
-  height: 100px;
-  max-width: 2000px;
+  height:100px;
+  max-width: 1800px;
   margin: 0 auto;
   position: relative;
 }
 
 .header__container .logo {
-  height: 50px;
-  position: absolute;
+  height:50px;
+  position:absolute;
   top: 0;
   bottom: 0;
   left: 0;
