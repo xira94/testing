@@ -9,7 +9,7 @@ header{
 }
 .header__container {
   height:100px;
-  max-width:2000px;
+  max-width: 1800px;
   margin: 0 auto;
   position: relative;
 }
@@ -17,10 +17,10 @@ header{
 .header__container .logo {
   height:50px;
   position:absolute;
-  top:0;
-  bottom:0;
-  left:0;
-  margin:auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
   font-weight: 400;
   font-size: 0.8cm;
   color: #186d51;

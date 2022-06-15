@@ -9,19 +9,7 @@ const DELETE = "post/DELETE"
 const GET = "post/GET"
 
 const initialState = {
-  // postslist: {
-  //   imageTest: "",
-  //   title: "",
-  //   content: ""
-  // },
-  // postList: [
-  //   {
-  //     postId: "",
-  //     createdAt: "",
-  //     title: "",
-      
-  //   },
-  // ],
+  
 };
 
 // Action creator
@@ -39,30 +27,14 @@ export function getPostList(post_list){
   return {type: GET, post_list }
 }
 
+
 // middleWare
 
-// export const loadPostDB = () => {
-//   return async function (dispatch){
-//     const post_data = await axios.post("http://sparta-swan.shop/api/posts", {
-//       headers: { "Content-Type": "application/json" }
-//     })
-//     .then(response => {
-//       console.log('서버 postslist에는', response.data)
-//       const post_list= []
-//       response.data.forEach(v => {
-//         post_list.push({...v})
-//       });
-//       console.log('메인에 들어갈 데이터는',post_list)
-//       dispatch(loadPost(post_list))
-//     })
-//   }
-// }
 export const getPostListDB = () => async (dispatch) => {
   try {
     const data = await axios.get("http://sparta-swan.shop/api/posts");
     dispatch(getPostList(data.data.postslist));
-    console.log('sadf')
-    console.log(data.data.postslist);
+    // console.log(data.data.postslist);
   } catch (error) {
     alert("오류가 발생했습니다. 다시 시도해주세요.");
     console.log(error);
@@ -80,6 +52,7 @@ export const addPostDB = (data) => {
       })
       .then((res) => {
         console.log(res);
+        window.location.assign("/");
       })
       .catch((error) => {
         console.log(error);
@@ -91,7 +64,7 @@ export const addPostDB = (data) => {
 export const modifyPostDB = (data, postId) => {
   return async function (dispatch, getState) {
     const post_data = await axios
-      .put(`http://sparta-swan.shop/api/posts/${postId}`, data, {
+      .put(`http://sparta-swan.shop/api/posts/${postId}` , data, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((response) => {
@@ -107,14 +80,15 @@ export const modifyPostDB = (data, postId) => {
 
 // 게시물 삭제
 export const deletePostDB = (postId) => {
-  return async function (dispatch) {
-    await axios
+  
+  return function (dispatch) {
+    axios
       .delete(`http://sparta-swan.shop/api/posts/${postId}`,
-      // {
-      //   headers: {
-      //     authorization: `Bearer ${localStorage.getItem("token")}`,
-      //   },
-      // }
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
       )
       .then((res) => {
         dispatch(deletePost(postId));
@@ -122,6 +96,7 @@ export const deletePostDB = (postId) => {
       })
       .catch((error) => {
         console.log(error);
+        // window.location.assign("/")
       });
   };
 };
@@ -149,8 +124,9 @@ export default function reducer(state = initialState, action={}){
     case "post/DELETE":{
       console.log(state.posts)
       const new_post_list= state.posts.filter((l,i)=>{
-        console.log(action.id.id)
-        return action.id.id !== l.id
+        console.log(action)
+        // window.alert('보자')
+        return action.postID!== l._id
       })
       return {posts: new_post_list}
 

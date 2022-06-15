@@ -1,7 +1,7 @@
 import React from "react";
 import "./css/Home.css";
 import { useDispatch, useSelector,  } from 'react-redux';
-import { Link  } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import { getPostListDB } from './redux/moduels/post'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,10 +16,10 @@ const Home = () => {
 
     dispatch(getPostListDB());
 
-  }, [dispatch]);
+  }, []);
 
   const data = useSelector(state => state.post.posts)
-  console.log(data)
+  // console.log(typeof(data[0]._id))
 
   // const toWrite = () => {
   //   navigate("/write");
@@ -98,8 +98,9 @@ const Home = () => {
       {data  && data.map((list,i)=> {
         return (
         <div className="img_home" key={i}>
-          <Link to = {`write/detail/${data[i]._id}`}>
+          <Link to = {`post/${data[i]._id}`}>
           <img
+            // navigate to ={`post/${data[i]._id}`}
             alt={data.length !==0 && data[i].title}
             src={`http://sparta-swan.shop/${data[i].imageUrl}`}
           ></img>

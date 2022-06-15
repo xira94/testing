@@ -9,10 +9,12 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  
   const is_login = useSelector((state) => state.user.is_login);
 
   const logout = () => {
     dispatch(logoutDB());
+    navigate('/')
   };
 
   const tologin = () => {

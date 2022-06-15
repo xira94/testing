@@ -9,7 +9,7 @@ const LOGOUT = "user/LOGOUT";
 const LOGIN_CHECK = "user/LOGIN_CHECK";
 
 const initialState = {
-  user: null,
+  user: '',
   is_login: false,
 };
 
@@ -54,8 +54,8 @@ export const signupDB = (userId, nickname, password, passwordCheck) => {
 
 export const loginDB = (userId, password) => {
   return function (dispatch) {
-    console.log(userId, password)
-    window.alert(password)
+    // console.log(userId, password)
+    // window.alert(password)
     axios
       .post("http://sparta-swan.shop/api/login", {
         userId: userId,
@@ -79,43 +79,56 @@ export const loginDB = (userId, password) => {
 };
 
 
+// export const logincheckDB = () => {
+//   return async function (dispatch) {
+//     const _logincheck = await axios
+//       .get("")
+//       .then((response) => {
+//         console.log(response);
+
+//         localStorage.setItem("loginUserId", response.data.userId);
+//         localStorage.setItem("loginUserName", response.data.nickname);
+
+
+//         dispatch(LOGIN_CHECK(response.data.userId, response.data.nickname));
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//       });
+//   };
+// };
 export const logincheckDB = () => {
-  return async function (dispatch) {
-    const _logincheck = await axios
-      .get("")
-      .then((response) => {
-        console.log(response);
-
-        localStorage.setItem("loginUserId", response.data.userId);
-        localStorage.setItem("loginUserName", response.data.nickname);
-
-
-        dispatch(LOGIN_CHECK(response.data.userId, response.data.nickname));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  return function (dispatch) {
+    const userId = localStorage.getItem("token");
+    const tokenCheck = document.cookie;
+    // console.log(userId)
+    if (userId) {
+      dispatch(logInUser({ userId: userId }));
+    } else {
+      dispatch(logOutUser());
+    }
   };
 };
 
 
-// export const idCheckFB = (userId) => {
-//   console.log(userId);
-//   return async function () {
-//     const _idCheck = await instance
-//       .get(`/api/user//${userId}`)
-//       .then((response) => {
-//         console.log(response);
-//         const message = response.data.message;
-//         window.alert(message);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//         const error_message = error.response.data.errorMessage;
-//         window.alert(error_message);
-//       });
-//   };
-// };
+
+export const idCheckFB = (userId) => {
+  // console.log(userId);
+  return async function () {
+    const _idCheck = await axios
+      .get(`http://sparta-swan.shop/api/login/api/user/${userId}`)
+      .then((response) => {
+        console.log(response);
+        const message = response.data.message;
+        window.alert(message);
+      })
+      .catch((error) => {
+        console.error(error);
+        const error_message = error.response.data.errorMessage;
+        window.alert(error_message);
+      });
+  };
+};
 
 // export const nicknameCheckFB = (nickname) => {
 //   console.log(nickname);

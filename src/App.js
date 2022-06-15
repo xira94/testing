@@ -7,16 +7,18 @@ import Header from "./Header";
 import Write from "./Write";
 import Signup from "./Signup";
 import Login from "./Login";
-// import {useDispatch}
+import {useDispatch} from 'react-redux'
+import { logincheckDB } from "./redux/moduels/user";
 
 function App() {
-  // const dispatch = useDispatch();
-  // const localStoragetokenCheck = localStorage.getItem("token");
-  // React.useEffect(() => {
-  //   if (localStoragetokenCheck) {
-  //     dispatch(logincheckFB());
-  //   }
-  // }, []);
+
+  const dispatch = useDispatch();
+  const localStoragetokenCheck = localStorage.getItem("token");
+  React.useEffect(() => {
+    if (localStoragetokenCheck) {
+      dispatch(logincheckDB());
+    }
+  }, []);
 
   return (
     <div className="App">
@@ -27,7 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/write" element={<Write />} />
         <Route path="/write/:id" element={<Write />} />
-        <Route path="/write/detail/:id" element={<Detail />} />
+        <Route path="/post/:id" element={<Detail />} />
       </Routes>
     </div>
   );
