@@ -47,7 +47,7 @@ export const signupDB = (userId, nickname, password) => {
 export const loginDB = (userId, password) => {
   return async function (dispatch) {
     await axios
-      .post("sparta-swan.shop/api/login", {
+      .post("http://sparta-swan.shop/api/login", {
         userId: userId,
         password: password,
       })
