@@ -58,7 +58,9 @@ const Signup = () => {
                 setUserId(e.target.value);
               }}
             />
+
             <button>중복확인</button>
+
           </div>
           <div className="pack">
             <input

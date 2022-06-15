@@ -25,7 +25,7 @@ export function logOutUser(user) {
 export const signupDB = (userId, nickname, password) => {
   return async function (dispatch, getState) {
     await axios
-      .post("sparta-swan.shop/api/register", {
+      .post("http://sparta-swan.shop/api/register", {
         userId: userId,
         nickName: nickname,
         password: password,
@@ -47,6 +47,7 @@ export const signupDB = (userId, nickname, password) => {
 export const loginDB = (userId, password) => {
   return async function (dispatch) {
     await axios
+
       .post("http://sparta-swan.shop/api/login", {
         userId: userId,
         password: password,
@@ -54,11 +55,13 @@ export const loginDB = (userId, password) => {
       .then((user) => {
         console.log(userId);
         localStorage.setItem("token", user.data.token);
+
         dispatch(
           logInUser({
             userId: userId,
           })
         );
+
         window.alert("환영합니다!");
         window.location.assign("/");
       })
@@ -72,14 +75,20 @@ export const loginDB = (userId, password) => {
 };
 
 export const logincheckDB = () => {
-  return function (dispatch) {
-    const userId = localStorage.getItem("userId");
-    const tokenCheck = document.cookie;
-    if (tokenCheck) {
-      dispatch(logInUser({ userId: userId }));
-    } else {
-      dispatch(logOutUser());
-    }
+  return async function (dispatch) {
+    const _logincheck = await axios
+      .get("")
+      .then((response) => {
+        console.log(response);
+
+        localStorage.setItem("loginUserId", response.data.userId);
+        localStorage.setItem("loginUserName", response.data.nickname);
+
+        dispatch(LOGIN_CHECK(response.data.userId, response.data.nickname));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 };
 
