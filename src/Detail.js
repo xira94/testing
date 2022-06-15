@@ -5,6 +5,7 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { deletePostDB } from "./redux/moduels/post";
+// import Comment from "./commentWrite";
 
 const Detail = () => {
   const dispatch = useDispatch();
@@ -37,48 +38,6 @@ const Detail = () => {
         </p>
       </div>
       <hr />
-      <section>
-        {/* <div class="container"> */}
-        <div className="row">
-          <div className="col-sm-5 col-md-6 col12 pb-4">
-            <h2>Comments</h2>
-            <div className="text-justify darker mt-4 float-right">
-              <h4>Jhon Doe</h4>
-              {/* <span>- 20 October, 2018</span> */}
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Accusamus numquam assumenda hic aliquam vero sequi velit
-              </p>
-            </div>
-            <div className="text-justify darker mt-4 float-right">
-              <h4>Rob Simpson</h4>
-              {/* <span>- 20 October, 2018</span> */}
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Accusamus numquam assumenda hic aliquam vero sequi velit
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section className="data-search">
-        <div className="input-group">
-          {/* <input
-             type="text"
-          className="form-control"
-             placeholder="Comment"
-           ></input> */}
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Comment"
-          ></input>
-
-          <button type="button" className="btn">
-            Submit
-          </button>
-        </div>
-      </section>
       <div className="buttons">
         <Link to={`/write/${param}`}>
           <button type="button" className="btn">

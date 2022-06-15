@@ -75,20 +75,14 @@ export const loginDB = (userId, password) => {
 };
 
 export const logincheckDB = () => {
-  return async function (dispatch) {
-    const _logincheck = await axios
-      .get("")
-      .then((response) => {
-        console.log(response);
-
-        localStorage.setItem("loginUserId", response.data.userId);
-        localStorage.setItem("loginUserName", response.data.nickname);
-
-        dispatch(LOGIN_CHECK(response.data.userId, response.data.nickname));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  return function (dispatch) {
+    const userId = localStorage.getItem("userId");
+    const tokenCheck = document.cookie;
+    if (tokenCheck) {
+      dispatch(logInUser({ userId: userId }));
+    } else {
+      dispatch(logOutUser());
+    }
   };
 };
 

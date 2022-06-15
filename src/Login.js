@@ -8,7 +8,6 @@ import "./css/Login.css";
 const Login = () => {
   const dispatch = useDispatch();
 
-
   const [userId, setuserId] = useState("");
 
   const [password, setPassword] = useState("");
@@ -26,19 +25,8 @@ const Login = () => {
   };
 
   const handleLogin = () => {
-
     console.log("되니?");
-<<<<<<< HEAD
-    // if (userId === "" || password === "") {
-    //   window.alert("이메일,비밀번호 모두 입력해주세요.");
-    // }
-    // if (!emailCheck) {
-    //   window.alert("이메일 형식에 맞게 작성해주세요요");
-    // }
-    // if (!passwordCheck(password)) {
-    //   window.alert("비밀번호를 형식에 맞게 입력해주세요");
-    // }
-=======
+
     if (userId === "" || password === "") {
       window.alert("이메일,비밀번호 모두 입력해주세요.");
     }
@@ -49,7 +37,6 @@ const Login = () => {
       window.alert("비밀번호를 형식에 맞게 입력해주세요");
     }
 
->>>>>>> master
     dispatch(loginDB(userId, password));
   };
 
@@ -69,9 +56,7 @@ const Login = () => {
             type="text"
             placeholder="아이디를 입력하세요."
             onChange={(e) => {
-
               setuserId(e.target.value);
-
             }}
           />
           <input
