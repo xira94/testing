@@ -24,7 +24,7 @@ const Home = () => {
   // };
   return (
     <div className="main">
-      <h1>Make Your Own Coffee</h1>
+      <h1>Starbucks Secret Menu</h1>
       <div className="image-banner">
         <img
           src="https://www.baltcoffee.com/sites/default/files/styles/slideshow/public/slideshow/coffee-wide-wallpaper-514611.jpg?itok=Fjn2iYfE"
