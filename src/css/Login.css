@@ -82,6 +82,18 @@
   background-color: #f6f5f0;
   border-color: transparent;
 }
+
+.formm input {
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  outline: none;
+  box-sizing: border-box;
+  font-size: 14px;
+  margin-top: 10px;
+}
 .login__card button {
   background-color: #006633;
   border: none;
