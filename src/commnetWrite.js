@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loadCommentFB, addCommentFB  } from "./redux/moduels/comment";
+import { loadCommentFB, addCommentFB, modifyCommentDB  } from "./redux/moduels/comment";
 import {getPostListDB} from './redux/moduels/post'
+
 import "./css/Detail.css";
 
 const Comment = ({ postId }) => {
@@ -9,7 +10,7 @@ const Comment = ({ postId }) => {
 
   React.useEffect(() => {
     dispatch(loadCommentFB(postId));
-  }, []);
+  }, [dispatch]);
   React.useEffect(() => {
 
     dispatch(getPostListDB());
@@ -29,8 +30,26 @@ const Comment = ({ postId }) => {
 
  
   const addcomment = () => {
-    dispatch(addCommentFB(postId, content));
+    dispatch(addCommentFB({
+      content:content
+    },postId));
   };
+
+
+  const modifyComment = () => {
+    dispatch(modifyCommentDB(
+  //     {
+  //   title: title,
+  //   imgUrl: attachment,
+  //   content: recipe
+  // }, param 
+  ));
+
+  }
+
+  const deleteComment = () => {
+
+  }
 
   return (
     <div>
@@ -41,17 +60,18 @@ const Comment = ({ postId }) => {
                 <h2>Comments</h2>
                 {data && data.map((list, i) => {
                 return (
-                  <>
-                  <div className="text-justify darker mt-4 float-right" key={i}>
+                  <div key={i}>
+                  <div className="text-justify darker mt-4 float-right" >
                     <h4>{data[i].nickname}</h4>
                     <p>{data[i].content}</p>
                   </div>
                   <div className="buttons">
-                    <button>수정</button>
-                    <button>삭제</button>
+                    <button onChange={modifyComment}>수정</button>
+                    <button onChange={deleteComment}>삭제</button>
                   </div>
-                  </>
-                 ); })}
+                  </div>
+                 )
+                 })}
                 </div>
               </div>
             </section>

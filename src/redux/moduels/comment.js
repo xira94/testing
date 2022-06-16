@@ -13,8 +13,8 @@ export const loadComment = (comment_list) => {
   return { type: LOAD_COMMENT, comment_list };
 };
 
-export const addComment = (comment) => {
-  return { type: ADD_COMMENT, comment };
+export const addComment = (comment_list) => {
+  return { type: ADD_COMMENT, comment_list };
 };
 
 
@@ -74,7 +74,7 @@ export const addCommentFB = (postId, content) => {
       .post(
         `/api/comment`,
         {
-          content: content,
+          content,
           postId: postId
         },
         {
@@ -85,7 +85,7 @@ export const addCommentFB = (postId, content) => {
         console.log(response);
 
         const message = response.data.message;
-        window.alert(message);
+        // window.alert(message);
 
         dispatch(addComment(content));
       })
@@ -97,6 +97,12 @@ export const addCommentFB = (postId, content) => {
   };
 };
 
+export const modifyCommentDB = (data, postId) => {
+  return async function (dispatch, getState) {
+
+  }
+}
+
 // reducer
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -104,9 +110,10 @@ export default function reducer(state = initialState, action = {}) {
       return { comments: action.comment_list };
 
     case "comment/ADD_COMMENT": {
-      const new_comment_list = [...state.comments, action.comment];
+      const new_comment_list = [ action.comment_list, ...state.comments];
       return { comments: new_comment_list };
     }
+    
 
     case "comment/DELETE_COMMENT": {
       const new_comment_list = state.comments.filter((l) => {
