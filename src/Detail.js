@@ -17,6 +17,7 @@ const Detail = (props) => {
   const post_data = useSelector((state) => state.post.posts);
   const is_login = useSelector((state) => state.user.is_login);
   const login_token = useSelector((state) => state.user.user);
+
   console.log(login_token);
   console.log(post_data);
 
@@ -59,10 +60,12 @@ const Detail = (props) => {
 
       <hr />
       <div className="last_btn">
+        <Link to={`/write/${nowPost && nowPost[0]._id}`}>
         <button type="button" className="btn__1">
           수정
         </button>
-        <button type="button" className="btn__1">
+        </Link>
+        <button type="button" className="btn__1" onClick={onDeleteHandler}>
           삭제
         </button>
       </div>
@@ -71,8 +74,8 @@ const Detail = (props) => {
       {/* 댓글 */}
       <Comment postId={postId} />
       {/* ----------댓글 여기까기------------- */}
-      {is_login ? (
-        <div className="buttons">
+      {/* {is_login ? ( */}
+        {/* <div className="buttons">
           <Link to={`/write/${nowPost && nowPost[0]._id}`}>
             <button type="button" className="btn">
               수정
@@ -81,10 +84,10 @@ const Detail = (props) => {
           <button type="button" className="btn" onClick={onDeleteHandler}>
             삭제
           </button>
-        </div>
-      ) : (
+        </div> */}
+      {/* ) : (
         ""
-      )}
+      )} */}
     </div>
   );
 };
