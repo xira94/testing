@@ -9,12 +9,12 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  
-  const is_login = useSelector((state) => state.user.is_login);
+  const is_login = localStorage.getItem("token");
+  const nickname = useSelector((state) => state.user.user.nickname);
 
   const logout = () => {
     dispatch(logoutDB());
-    navigate('/')
+    navigate("/");
   };
 
   const tologin = () => {
@@ -33,6 +33,7 @@ const Header = () => {
           </div>
         </Link>
         <div className="menu">
+          <span>{nickname}</span>
           {is_login ? (
             <button type="button" className="btn_1" onClick={logout}>
               Logout
@@ -42,7 +43,6 @@ const Header = () => {
               <button type="button" className="btn_1" onClick={toSignup}>
                 Signup
               </button>
-
               <button type="button" className="btn_1" onClick={tologin}>
                 Login
               </button>
