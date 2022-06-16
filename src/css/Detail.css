@@ -357,3 +357,17 @@ select:hover {
     fill: #393e46;
   }
 }
+
+.btn__1 {
+  background-color: rgb(27, 88, 79);
+  border-left: 1px solid #fff;
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 0;
+  box-sizing: border-box;
+  border: none;
+  margin: auto;
+  width: 50px;
+  border-radius: 4px;
+  margin: 3px;
+}

@@ -21,9 +21,7 @@ const Detail = (props) => {
   console.log(post_data);
 
   React.useEffect(() => {
-
     dispatch(getPostListDB());
-
   }, []);
 
   // React.useEffect(() => {
@@ -39,10 +37,8 @@ const Detail = (props) => {
   // console.log(nowPost[0]._id)
 
   const onDeleteHandler = () => {
-
     dispatch(deletePostDB(postId));
   };
-
 
   return (
     <div className="Detail__container">
@@ -62,7 +58,14 @@ const Detail = (props) => {
       </div>
 
       <hr />
-
+      <div className="last_btn">
+        <button type="button" className="btn__1">
+          수정
+        </button>
+        <button type="button" className="btn__1">
+          삭제
+        </button>
+      </div>
       <hr />
 
       {/* 댓글 */}
