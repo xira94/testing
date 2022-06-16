@@ -1,3 +1,4 @@
+import axios from "axios";
 import instance from "../shared/request";
 
 const LOAD_COMMENT = "comment/LOAD_COMMENT";
@@ -17,6 +18,9 @@ export const addComment = (comment_list) => {
   return { type: ADD_COMMENT, comment_list };
 };
 
+export const modifyComment = (comment_list) => {
+  return { type: EDIT_COMMENT, comment_list };
+};
 
 
 export const deleteComment = (id) => {
@@ -26,7 +30,7 @@ export const deleteComment = (id) => {
 
 // middlewares
 
-export const loadCommentFB = (postId) => async (dispatch) => {
+export const loadCommentDB = (postId) => async (dispatch) => {
   try {
     const data = await instance.get(`api/comment/${postId}`,
     {
@@ -42,7 +46,7 @@ export const loadCommentFB = (postId) => async (dispatch) => {
   }
 };
 
-// export const loadCommentFB = (postId) => {
+// export const loadCommenB = (postId) => {
 //   // console.log(postId);
 //   return async function (dispatch) {
 //     const _loadcomment = await instance
@@ -66,15 +70,15 @@ export const loadCommentFB = (postId) => async (dispatch) => {
 //   };
 // };
 
-export const addCommentFB = (postId, content) => {
+export const addCommentDB = (content, postId) => {
   console.log(postId);
   console.log(content);
   return async function (dispatch) {
-    const _addcomment = await instance
+    instance
       .post(
         `/api/comment`,
         {
-          content,
+          content: content,
           postId: postId
         },
         {
@@ -86,8 +90,9 @@ export const addCommentFB = (postId, content) => {
 
         const message = response.data.message;
         // window.alert(message);
-
-        dispatch(addComment(content));
+        
+        // dispatch(addComment({content}));
+         window.location.assign(`/post/${postId}`)
       })
       .catch((error) => {
         console.log(error);
@@ -103,6 +108,27 @@ export const modifyCommentDB = (data, postId) => {
   }
 }
 
+export const deleteCommentDB = (commentId) => {
+  console.log(commentId)
+  return function (dispatch){
+    instance.delete(`/api/comment/${commentId}`,
+    {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+    )
+    .then((res)=> {
+      console.log(res)
+      dispatch(deleteComment(commentId));
+      // window.location.assign(`/`)
+    })
+    .catch((error)=> {
+      console.log(error)
+    })
+  }
+}
+
 // reducer
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
@@ -113,12 +139,21 @@ export default function reducer(state = initialState, action = {}) {
       const new_comment_list = [ action.comment_list, ...state.comments];
       return { comments: new_comment_list };
     }
-    
+    case "post/MODIFY": {
+      
+      const modify_post = [ ...action.post_list ];
+      console.log(modify_post)
+      return { posts: modify_post };
+    }
 
     case "comment/DELETE_COMMENT": {
-      const new_comment_list = state.comments.filter((l) => {
-        return parseInt(action.commentId) !== l.commentId;
+      console.log(state.comments)
+      const new_comment_list = state.comments.filter((l,i) => {
+        // console.log(l._id)
+        // console.log(action)
+        return action.id !== l._id;
       });
+      console.log(new_comment_list)
       return { comments: new_comment_list };
     }
     default:

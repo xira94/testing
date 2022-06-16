@@ -125,7 +125,6 @@ export const deletePostDB = (postId) => {
       })
       .catch((error) => {
         console.log(error);
-        // window.location.assign("/")
       });
   };
 };

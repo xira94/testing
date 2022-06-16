@@ -20,6 +20,12 @@ const Detail = (props) => {
   console.log(login_token);
   console.log(post_data);
 
+  React.useEffect(() => {
+
+    dispatch(getPostListDB());
+
+  }, []);
+
   // React.useEffect(() => {
 
   //   dispatch(getPostListDB());
