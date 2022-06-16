@@ -2,7 +2,7 @@ import instance from "../shared/request";
 
 const LOAD_COMMENT = "comment/LOAD_COMMENT";
 const ADD_COMMENT = "comment/ADD_COMMENT";
-// const EDIT_COMMENT = "comment/EDIT_COMMENT";
+const EDIT_COMMENT = "comment/EDIT_COMMENT";
 const DELETE_COMMENT = "comment/DELETE_COMMENT";
 
 const initialState = {
@@ -16,6 +16,13 @@ export const loadComment = (comment_list) => {
 export const addComment = (comment) => {
   return { type: ADD_COMMENT, comment };
 };
+
+
+
+export const deleteComment = (id) => {
+  return { type: DELETE_COMMENT, id };
+};
+
 
 // middlewares
 

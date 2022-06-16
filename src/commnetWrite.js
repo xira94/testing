@@ -41,10 +41,16 @@ const Comment = ({ postId }) => {
                 <h2>Comments</h2>
                 {data && data.map((list, i) => {
                 return (
+                  <>
                   <div className="text-justify darker mt-4 float-right" key={i}>
                     <h4>{data[i].nickname}</h4>
                     <p>{data[i].content}</p>
                   </div>
+                  <div className="buttons">
+                    <button>수정</button>
+                    <button>삭제</button>
+                  </div>
+                  </>
                  ); })}
                 </div>
               </div>
