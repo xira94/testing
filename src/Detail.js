@@ -7,6 +7,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePostDB, getPostListDB } from "./redux/moduels/post";
 import Comment from "./commnetWrite";
+
 const Detail = (props) => {
   // const localStoragetokenCheck = localStorage.getItem("token");
   // console.log(localStoragetokenCheck)
