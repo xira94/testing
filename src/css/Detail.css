@@ -205,8 +205,8 @@ body {
   display: inline;
   
 } */
-.wrapper{
-  margin-left:60px;
+.wrapper {
+  margin-left: 60px;
 }
 
 .comment p,
@@ -223,7 +223,7 @@ h4 {
   font-weight: bold;
   font-size: 1em;
   margin-right: 20px;
-  margin-top:2px;
+  margin-top: 2px;
 }
 label {
   color: rgb(212, 208, 208);
@@ -316,13 +316,13 @@ select:hover {
 .commentButtons > button {
   margin-top: 4px;
   background-color: transparent;
-  border:1px solid transparent;
+  border: 1px solid transparent;
   padding: 0 5px;
   border-radius: 10px;
   float: right;
   outline: none;
   font-size: 0.9em;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 @keyframes popUp {
@@ -356,4 +356,18 @@ select:hover {
   100% {
     fill: #393e46;
   }
+}
+
+.btn__1 {
+  background-color: rgb(27, 88, 79);
+  border-left: 1px solid #fff;
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 0;
+  box-sizing: border-box;
+  border: none;
+  margin: auto;
+  width: 50px;
+  border-radius: 4px;
+  margin: 3px;
 }
