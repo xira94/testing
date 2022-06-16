@@ -111,7 +111,7 @@ export const modifyPostDB = (data, postId) => {
 export const deletePostDB = (postId) => {
   
   return function (dispatch) {
-    axios
+     axios
       .delete(`http://sparta-swan.shop/api/posts/${postId}`,
       {
         headers: {
