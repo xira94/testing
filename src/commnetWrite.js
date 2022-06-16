@@ -38,11 +38,11 @@ const Comment = ({ postId }) => {
 
   const modifyComment = () => {
     dispatch(modifyCommentDB(
-  //     {
-  //   title: title,
-  //   imgUrl: attachment,
-  //   content: recipe
-  // }, param 
+    //   {
+    //   title: title,
+    //   imgUrl: attachment,
+    //   content: recipe
+    // }, param 
   ));
 
   }
