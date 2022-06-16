@@ -154,6 +154,7 @@ body {
   border-style: solid;
   border-radius: 13px;
   width: 50%;
+  
 }
 
 #nav-items li a,
@@ -166,8 +167,13 @@ body {
 .comments {
   margin-top: 5%;
   margin-left: 20px;
-  
 }
+/* .col{
+  display:flex;
+  flex-direction: column;
+  background-color: red;
+  width:80%;
+} */
 
 .darker {
   border: 2px solid #ecb21f;
@@ -178,6 +184,7 @@ body {
   padding-right: 30px;
   padding-top: 15px;
   
+
 }
 
 .comment {
@@ -188,15 +195,18 @@ body {
   padding-left: 40px;
   padding-right: 30px;
   padding-top: 10px;
+  
 }
-.comment h4,
+/* .comment h4,
 .comment span {
   display: inline;
-}
-.darker h4,
+  
+} */
+/* .darker h4,
 .darker span {
   display: inline;
-}
+  
+} */
 
 .comment p,
 .comment span {
@@ -210,6 +220,7 @@ body {
 h4 {
   color: white;
   font-weight: bold;
+  font-size: 1em;
 }
 label {
   color: rgb(212, 208, 208);

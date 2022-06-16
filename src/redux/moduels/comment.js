@@ -21,14 +21,20 @@ export const addComment = (comment) => {
 
 export const loadCommentFB = (postId) => async (dispatch) => {
   try {
-    const data = await instance.get(`api/comment/${postId}`);
-    dispatch(loadComment(data));
-    console.log(data);
+    const data = await instance.get(`api/comment/${postId}`,
+    {
+     headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+    }
+    )
+    console.log(data.data.comments);
+    dispatch(loadComment(data.data.comments));
+    
   } catch (error) {
     alert("오류가 발생했습니다. 다시 시도해주세요.");
     console.log(error);
   }
 };
+
 // export const loadCommentFB = (postId) => {
 //   // console.log(postId);
 //   return async function (dispatch) {
