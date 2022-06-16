@@ -59,6 +59,7 @@ const Comment = ({ postId }) => {
   const modifyCancel = () => {
     setCommentEditMode(false)
   }
+  
   const deleteComment = (e) => {
     // console.log(e.target.value)
     const number = e.target.value

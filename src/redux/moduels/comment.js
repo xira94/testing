@@ -37,8 +37,10 @@ export const loadCommentDB = (postId) => async (dispatch) => {
      headers: { Authorization: "Bearer " + localStorage.getItem("token") },
     }
     )
+    console.log(data)
     console.log(data.data.comments);
     dispatch(loadComment(data.data.comments));
+    
     
   } catch (error) {
     alert("오류가 발생했습니다. 다시 시도해주세요.");
